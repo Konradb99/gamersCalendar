@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "61197362955",
+    "project_id": "gamerscalendar-71d29",
+    "storage_bucket": "gamerscalendar-71d29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61197362955:android:8f70f2256d16629b88240e",
+        "android_client_info": {
+          "package_name": "com.konradb.gamersCalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61197362955-t6ktvqlutsecufnu54m5n17c0l8ucv03.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwgiR9BEnikdOn7WmaWP-45_hU7zqFMio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61197362955-t6ktvqlutsecufnu54m5n17c0l8ucv03.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
