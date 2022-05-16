@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/login_panel2">
+    <fragment
+        android:id="@+id/login_panel2"
+        android:name="com.konradb.gameCalendar.login.login_panel"
+        android:label="login_panel" >
+        <action
+            android:id="@+id/action_login_panel2_to_register_panel2"
+            app:destination="@id/register_panel2" />
+    </fragment>
+    <fragment
+        android:id="@+id/register_panel2"
+        android:name="com.konradb.gameCalendar.register.Register_panel"
+        android:label="Register_panel" >
+        <action
+            android:id="@+id/action_register_panel2_to_login_panel2"
+            app:destination="@id/login_panel2" />
+    </fragment>
+</navigation>

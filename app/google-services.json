@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "61197362955",
-    "project_id": "gamerscalendar-71d29",
-    "storage_bucket": "gamerscalendar-71d29.appspot.com"
+    "project_number": "387547606377",
+    "project_id": "gamerscalendar-43e36",
+    "storage_bucket": "gamerscalendar-43e36.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:61197362955:android:8f70f2256d16629b88240e",
+        "mobilesdk_app_id": "1:387547606377:android:f40216d7e79700bcb4a1f8",
         "android_client_info": {
-          "package_name": "com.konradb.gamersCalendar"
+          "package_name": "com.konradb.gameCalendar"
         }
       },
       "oauth_client": [
         {
-          "client_id": "61197362955-t6ktvqlutsecufnu54m5n17c0l8ucv03.apps.googleusercontent.com",
+          "client_id": "387547606377-lj6m12eicra7et3gg84q6djcccrlcogt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBwgiR9BEnikdOn7WmaWP-45_hU7zqFMio"
+          "current_key": "AIzaSyDEo9rHzet_zwdtKKV1W4KJ0IfIx4CLx-s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "61197362955-t6ktvqlutsecufnu54m5n17c0l8ucv03.apps.googleusercontent.com",
+              "client_id": "387547606377-lj6m12eicra7et3gg84q6djcccrlcogt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
