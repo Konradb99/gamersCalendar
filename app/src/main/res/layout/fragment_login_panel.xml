@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity"
     android:background="@color/darkgray">
 
     <TextView
@@ -13,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="GAMERS CALENDAR"
         android:textSize="20sp"
+        android:layout_marginTop="30dp"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:padding="5dp"
@@ -20,7 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
         />
 
     <ImageView
@@ -49,11 +48,21 @@
         android:layout_marginHorizontal="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/appLoginEmailText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/appLoginEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/appLoginPasswd"
@@ -68,11 +77,22 @@
         android:layout_marginHorizontal="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/appLoginPasswdText"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/appLoginPasswd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
 
     <Button
         android:id="@+id/appLoginBtn"
@@ -137,6 +157,7 @@
             android:textAlignment="textEnd"/>
 
         <TextView
+            android:id="@+id/registerBtnFromLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up now"

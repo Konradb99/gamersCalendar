@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register.RegisterActivity"
     android:background="@color/darkgray">
 
     <TextView
@@ -20,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         />
 
     <ImageView
@@ -49,11 +48,21 @@
         android:layout_marginHorizontal="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/appRegisterEmailText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/appRegisterEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/appRegisterPasswd"
@@ -68,13 +77,54 @@
         android:layout_marginHorizontal="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/appRegisterPasswdText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:background="#00000000"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/appRegisterPasswd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/appRegisterPasswdRepeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/appRegisterPasswd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:hint="Repeat password"
+        android:textColorHint="@color/white"
+        android:layout_marginHorizontal="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/appRegisterPasswdRepeatText"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#00000000"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <View
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/appRegisterPasswdRepeat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appRegisterBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,8 +132,9 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@+id/appRegisterPasswd"
+        app:layout_constraintTop_toBottomOf="@+id/appRegisterPasswdRepeat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="REGISTER"
@@ -123,6 +174,7 @@
             android:textAlignment="textEnd"/>
 
         <TextView
+            android:id="@+id/loginBtnToRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign in now"

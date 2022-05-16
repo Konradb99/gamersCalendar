@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/login_panel2">
     <fragment
+        tools:layout="@layout/fragment_login_panel"
         android:id="@+id/login_panel2"
         android:name="com.konradb.gameCalendar.login.login_panel"
         android:label="login_panel" >
@@ -13,6 +14,7 @@
             app:destination="@id/register_panel2" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_register_panel"
         android:id="@+id/register_panel2"
         android:name="com.konradb.gameCalendar.register.Register_panel"
         android:label="Register_panel" >
