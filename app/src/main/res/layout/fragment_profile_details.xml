@@ -35,43 +35,15 @@
         android:layout_marginTop="50dp"
         />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/appFindByName"
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:hint="Find by title"
-        android:textColorHint="@color/white"
-        android:layout_marginHorizontal="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/appFindByNameText"
-            android:textSize="21sp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#00000000"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <View
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/appFindByName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="20dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/appFindByName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Wyloguj"
+        android:id="@+id/appLogoutButton"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -6,4 +6,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+
+    <style name="Theme.App" parent="Theme.MaterialComponents">
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
+        <item name="colorPrimary">@color/darkgray</item>
+        <item name="colorOnPrimary">@color/lightgray</item>
+    </style>
 </resources>

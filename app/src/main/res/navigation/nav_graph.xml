@@ -11,7 +11,11 @@
         android:label="login_panel" >
         <action
             android:id="@+id/action_login_panel2_to_register_panel2"
-            app:destination="@id/register_panel2" />
+            app:destination="@id/register_panel2"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"/>
     </fragment>
     <fragment
         tools:layout="@layout/fragment_register_panel"
@@ -20,6 +24,10 @@
         android:label="Register_panel" >
         <action
             android:id="@+id/action_register_panel2_to_login_panel2"
-            app:destination="@id/login_panel2" />
+            app:destination="@id/login_panel2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
 </navigation>
