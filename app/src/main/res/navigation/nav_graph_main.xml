@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/game_details"
-        android:name="com.konradb.gameCalendar.game_details"
+        android:name="com.konradb.gameCalendar.main_app.game_details"
         android:label="fragment_game_details"
         tools:layout="@layout/fragment_game_details" >
         <action

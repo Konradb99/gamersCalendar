@@ -15,15 +15,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.konradb.gameCalendar.R
-import com.konradb.gameCalendar.main_app.Model.AllGames
 import com.konradb.gameCalendar.main_app.Model.DataBaseEntities.Game
+import com.konradb.gameCalendar.main_app.ViewModel.GameViewModel
 import java.util.concurrent.Executors
 
-class AllGamesAdapter(private val games: MutableLiveData<List<Game>>, context: Context): RecyclerView.Adapter<AllGamesAdapter.MyView>() {
+class AllGamesAdapter(private val viewModel: GameViewModel, private val games: MutableLiveData<List<Game>>, context: Context): RecyclerView.Adapter<AllGamesAdapter.MyView>() {
     class MyView(view: View) : RecyclerView.ViewHolder(view) {
         var gameName = view.findViewById<TextView>(R.id.gameName)
         var gameReleaseDate = view.findViewById<TextView>(R.id.gameRelease)
         var gameIcon = view.findViewById<ImageView>(R.id.gameIcon)
+        var gameId = view.findViewById<TextView>(R.id.gameId)
         var myView = view
     }
 
@@ -41,17 +42,16 @@ class AllGamesAdapter(private val games: MutableLiveData<List<Game>>, context: C
         val executor = Executors.newSingleThreadExecutor()
         val handler = Handler(Looper.getMainLooper())
         var image: Bitmap? = null
-        executor.execute(){
+        executor.execute() {
             val imageUrl = games.value?.get(position)?.background_image
-            try{
+            try {
                 val img = java.net.URL(imageUrl).openStream()
                 image = BitmapFactory.decodeStream(img)
 
-                handler.post(){
+                handler.post() {
                     holder.gameIcon.setImageBitmap(image)
                 }
-            }
-            catch(e: Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
@@ -60,11 +60,16 @@ class AllGamesAdapter(private val games: MutableLiveData<List<Game>>, context: C
         //set data
         holder.gameName.text = games.value?.get(position)?.name
         holder.gameReleaseDate.text = games.value?.get(position)?.released
+        holder.gameId.text = games.value?.get(position)?.id.toString()
 
         //set OnClick for item
         holder.myView.setOnClickListener(){
+            //save game to ViewModel
+            viewModel.gameId = holder.gameId.text.toString().toLong()
             holder.myView.findNavController().navigate(R.id.action_all_games_list_to_game_details)
         }
+
+
     }
     override fun getItemCount()= games.value?.count()?:0
 }

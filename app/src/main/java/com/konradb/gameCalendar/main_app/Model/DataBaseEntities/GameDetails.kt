@@ -5,5 +5,4 @@ data class GameDetails (
     var name: String? = null,
     var released: String? = null,
     var background_image: String? = null,
-    var metacritic: Int = 0,
 ){}

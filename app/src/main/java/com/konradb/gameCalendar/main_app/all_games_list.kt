@@ -6,18 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.konradb.gameCalendar.R
-import com.konradb.gameCalendar.main_app.Model.AllGames
-import com.konradb.gameCalendar.main_app.Model.ApiInterface
+import com.konradb.gameCalendar.main_app.Model.API.AllGames
+import com.konradb.gameCalendar.main_app.Model.API.ApiInterface
 import com.konradb.gameCalendar.main_app.Model.DataBaseEntities.Game
 import com.konradb.gameCalendar.main_app.Model.Models.CreateEntity
 import com.konradb.gameCalendar.main_app.ViewModel.Adapters.AllGamesAdapter
+import com.konradb.gameCalendar.main_app.ViewModel.Factory.GameViewModelFactory
+import com.konradb.gameCalendar.main_app.ViewModel.GameViewModel
 import com.konradb.gameCalendar.main_app.others.Constants
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,9 +59,83 @@ class all_games_list : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_all_games_list, container, false)
     }
+    private lateinit var viewModel: GameViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //prepare viewmodel
+        val factory = GameViewModelFactory((requireNotNull(this.activity).application))
+        viewModel = ViewModelProvider(requireActivity(), factory).get(GameViewModel::class.java)
+
+
+        //Prepare livedata
+        val gamesList = MutableLiveData<List<Game>>()
+        val games:ArrayList<Game> = ArrayList()
+        gamesList.value = games
+
+
+        //Prepare layout View
+        var layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        var adapter =AllGamesAdapter(viewModel, gamesList, requireContext())
+        gamesList.observe(viewLifecycleOwner, {adapter.notifyDataSetChanged()})
+
+        view.findViewById<RecyclerView>(R.id.allGamesRecyclerView).let{
+            it.adapter = adapter
+            it.layoutManager = layoutManager
+        }
+
+        //Download all games from api
+        val retrofit = Retrofit.Builder()
+            .baseUrl(all_games_list.BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(ApiInterface::class.java)
+        val callAllGames = service.getAllGames(Constants.APIKEY, 1, 20)
+
+        //Starting api download
+        callAllGames.enqueue(object: Callback<AllGames> {
+            override fun onFailure(call: Call<AllGames>, t: Throwable) {
+                println("Nie udalo sie pobrac danych")
+            }
+            override fun onResponse(call: Call<AllGames>, response: Response<AllGames>) {
+                games.clear()
+                if(response.code() == 200) {
+
+                    val gamesListApi = response.body()
+                    var newGame: Game
+                    for(game in gamesListApi!!.result){
+                        newGame = CreateEntity.CreateGame(game)
+                        println("${game.id}, ${game.name}")
+                        games.add(newGame)
+                    }
+                }
+                gamesList.value = games
+            }
+        })
+
+        //Search query
+        /*view.findViewById<TextInputEditText>(R.id.appFindByNameText).doOnTextChanged { text, start, before, count ->
+            val callByName = service.getGamesByName(Constants.APIKEY, 1, 20, view.findViewById<TextInputEditText>(R.id.appFindByNameText).text.toString())
+            callByName.enqueue(object: Callback<AllGames> {
+                override fun onFailure(call: Call<AllGames>, t: Throwable) {
+                    println("Nie udalo sie pobrac danych")
+                }
+                override fun onResponse(call: Call<AllGames>, response: Response<AllGames>) {
+                    if(response.code() == 200) {
+                        val gamesListApi = response.body()
+                        var newGame: Game
+                        for(game in gamesListApi!!.result){
+                            newGame = CreateEntity.CreateGame(game)
+                            games.add(newGame)
+                        }
+                        gamesList.value = games
+                    }
+                }
+            })
+        }*/
+
+        //Bottom navigation bars
         view.findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener { item ->
             when(item.itemId){
                 R.id.page_1 -> {
@@ -75,76 +153,6 @@ class all_games_list : Fragment() {
                 else -> false
             }
         }
-        //Prepare livedata
-        val gamesList = MutableLiveData<List<Game>>()
-        val games:ArrayList<Game> = ArrayList()
-        gamesList.value = games
-
-
-        //Prepare layout View
-        var layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        var adapter =AllGamesAdapter(gamesList, requireContext())
-        gamesList.observe(viewLifecycleOwner, {adapter.notifyDataSetChanged()})
-
-        view.findViewById<RecyclerView>(R.id.allGamesRecyclerView).let{
-            it.adapter = adapter
-            it.layoutManager = layoutManager
-        }
-
-
-        //Download all games from api
-        val retrofit = Retrofit.Builder()
-            .baseUrl(all_games_list.BaseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val service = retrofit.create(ApiInterface::class.java)
-        val callAllGames = service.getAllGames(Constants.APIKEY, 1, 20)
-
-        callAllGames.enqueue(object: Callback<AllGames> {
-            override fun onFailure(call: Call<AllGames>, t: Throwable) {
-                println("Nie udalo sie pobrac danych")
-            }
-            override fun onResponse(call: Call<AllGames>, response: Response<AllGames>) {
-                if(response.code() === 200) {
-                    games.clear()
-                    val gamesListApi = response.body()
-                    var newGame = Game()
-                    for(game in gamesListApi!!.result){
-                        newGame = CreateEntity.CreateGame(game)
-                        games.add(newGame)
-                    }
-                    gamesList.value = games
-                    println(games.size)
-                }
-            }
-        })
-
-        view.findViewById<TextInputEditText>(R.id.appFindByNameText).doOnTextChanged { text, start, before, count ->
-            val callByName = service.getGamesByName(Constants.APIKEY, 1, 20, view.findViewById<TextInputEditText>(R.id.appFindByNameText).text.toString())
-            callByName.enqueue(object: Callback<AllGames> {
-                override fun onFailure(call: Call<AllGames>, t: Throwable) {
-                    println("Nie udalo sie pobrac danych")
-                }
-                override fun onResponse(call: Call<AllGames>, response: Response<AllGames>) {
-                    if(response.code() === 200) {
-                        games.clear()
-                        val gamesListApi = response.body()
-                        var newGame = Game()
-                        for(game in gamesListApi!!.result){
-                            newGame = CreateEntity.CreateGame(game)
-                            games.add(newGame)
-                        }
-                        gamesList.value = games
-                        println(games.size)
-                    }
-                }
-            })
-        }
-
-
-
-
-
 
     }
 
