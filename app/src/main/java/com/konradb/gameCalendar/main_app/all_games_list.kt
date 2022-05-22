@@ -115,13 +115,14 @@ class all_games_list : Fragment() {
         })
 
         //Search query
-        /*view.findViewById<TextInputEditText>(R.id.appFindByNameText).doOnTextChanged { text, start, before, count ->
+        view.findViewById<TextInputEditText>(R.id.appFindByNameText).doOnTextChanged { text, start, before, count ->
             val callByName = service.getGamesByName(Constants.APIKEY, 1, 20, view.findViewById<TextInputEditText>(R.id.appFindByNameText).text.toString())
             callByName.enqueue(object: Callback<AllGames> {
                 override fun onFailure(call: Call<AllGames>, t: Throwable) {
                     println("Nie udalo sie pobrac danych")
                 }
                 override fun onResponse(call: Call<AllGames>, response: Response<AllGames>) {
+                    games.clear()
                     if(response.code() == 200) {
                         val gamesListApi = response.body()
                         var newGame: Game
@@ -129,11 +130,12 @@ class all_games_list : Fragment() {
                             newGame = CreateEntity.CreateGame(game)
                             games.add(newGame)
                         }
-                        gamesList.value = games
+
                     }
+                    gamesList.value = games
                 }
             })
-        }*/
+        }
 
         //Bottom navigation bars
         view.findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener { item ->

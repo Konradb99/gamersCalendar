@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_margin="3dp"
+    android:orientation="horizontal"
+    android:background="@color/darkgray"
+    android:id="@+id/gameItem">
+
+    <ImageView
+        android:id="@+id/gameIcon"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:src="@drawable/sample"
+        android:scaleType="fitCenter"
+        android:layout_weight="0.87"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_weight="2"
+        android:padding="3dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/gameName"
+            android:layout_height="35dp"
+            android:layout_width="match_parent"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:singleLine="true"
+            android:inputType="textNoSuggestions"
+            android:text="Game Name"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+            <ImageView
+                android:id="@+id/statusIcon"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:src="@drawable/completed"
+                android:scaleType="fitEnd"
+                />
+
+            <TextView
+                android:id="@+id/gameStatus"
+                android:layout_height="35dp"
+                android:layout_width="0dp"
+                android:text="Status"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textAlignment="textStart"
+                android:layout_weight="1.6"
+                android:layout_marginStart="3dp"
+                />
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_height="35dp"
+            android:layout_width="match_parent"
+            android:id="@+id/gameId"
+            android:textColor="@color/darkgray"
+            />
+    </LinearLayout>
+</LinearLayout>

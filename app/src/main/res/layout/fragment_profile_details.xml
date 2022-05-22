@@ -35,15 +35,84 @@
         android:layout_marginTop="50dp"
         />
 
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp"
-        android:text="Wyloguj"
-        android:id="@+id/appLogoutButton"
+        android:text="Account email"
+        android:textColor="@color/white"
+        android:textSize="21sp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="32dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/profileEmail"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:id="@+id/profileGamesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/profileEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Games in library counter"
+        android:textColor="@color/white"
+        android:textSize="21sp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="22dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/profileGamesCount"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profileChangePasswordBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#4C5058"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@+id/profileGamesCount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="REGISTER"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/profileLogoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#4C5058"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@+id/profileChangePasswordBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="REGISTER"
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

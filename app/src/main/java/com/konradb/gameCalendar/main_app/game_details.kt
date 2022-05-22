@@ -15,11 +15,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.konradb.gameCalendar.R
 import com.konradb.gameCalendar.main_app.Model.API.ApiInterface
 import com.konradb.gameCalendar.main_app.Model.API.GameApi
 import com.konradb.gameCalendar.main_app.Model.API.AllGames
 import com.konradb.gameCalendar.main_app.Model.DataBaseEntities.Game
+import com.konradb.gameCalendar.main_app.Model.FireBase.GameData
 import com.konradb.gameCalendar.main_app.Model.Models.CreateEntity
 import com.konradb.gameCalendar.main_app.ViewModel.Factory.GameViewModelFactory
 import com.konradb.gameCalendar.main_app.ViewModel.GameViewModel
@@ -97,6 +102,7 @@ class game_details : Fragment() {
                             image = BitmapFactory.decodeStream(img)
 
                             handler.post() {
+                                viewModel.gameImage = gameApi?.background_image
                                 view.findViewById<ImageView>(R.id.gameIcon).setImageBitmap(image)
                             }
                         } catch (e: Exception) {
@@ -113,7 +119,7 @@ class game_details : Fragment() {
 
                     //Set text attributes
                     view.findViewById<TextView>(R.id.gameName).text = gameApi?.name
-                    view.findViewById<TextView>(R.id.gameReleaseDate).text = "Released {gameApi?.released}"
+                    view.findViewById<TextView>(R.id.gameReleaseDate).text = "Released ${gameApi?.released}"
                     view.findViewById<TextView>(R.id.gameRating).text = gameApi?.rating
                     view.findViewById<TextView>(R.id.gameMetacritic).text = gameApi?.metacritic.toString()
                     view.findViewById<TextView>(R.id.gameGenres).text = genresStr
@@ -122,9 +128,57 @@ class game_details : Fragment() {
         })
 
         //Set Touch listeners
-
         view.findViewById<Button>(R.id.gameBack).setOnClickListener(){
             view.findNavController().navigate(R.id.action_game_details_to_all_games_list)
+        }
+
+        view.findViewById<Button>(R.id.gameAddToLibraryButton).setOnClickListener(){
+            //Statuses: In progress, Completed, To check
+            //Default status = To check
+
+            //Prepare game data to add to database
+            viewModel.gameName = view.findViewById<TextView>(R.id.gameName).text.toString()
+            viewModel.gameReleaseDate = view.findViewById<TextView>(R.id.gameReleaseDate).text.toString()
+            viewModel.gameRating = view.findViewById<TextView>(R.id.gameRating).text.toString()
+            viewModel.gameMetacritic = view.findViewById<TextView>(R.id.gameMetacritic).text.toString()
+            viewModel.gameGenres = view.findViewById<TextView>(R.id.gameGenres).text.toString()
+
+
+            //Prepare reference to database
+            val database = Firebase.database("https://gamerscalendar-43e36-default-rtdb.europe-west1.firebasedatabase.app/")
+            val ref = database.getReference("")
+            val gameId = ref.push().key
+
+            //Prepare object to add
+            var gameToAdd = GameData(gameId,
+                viewModel.gameName,
+                viewModel.gameReleaseDate,
+                viewModel.gameRating,
+                viewModel.gameMetacritic!!.toInt(),
+                viewModel.gameImage,
+                viewModel.gameGenres,
+                "To check"
+            )
+            //Add to database
+            ref.child(gameId!!).setValue(gameToAdd)
+        }
+
+        view.findViewById<BottomNavigationView>(R.id.bottom_navigation).setOnItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.page_1 -> {
+                    view.findNavController().navigate(R.id.action_game_details_to_main_list_fragment)
+                    true
+                }
+                R.id.page_2 -> {
+                    view.findNavController().navigate(R.id.action_game_details_to_all_games_list)
+                    true
+                }
+                R.id.page_3 -> {
+                    view.findNavController().navigate(R.id.action_game_details_to_fragment_profile_details)
+                    true
+                }
+                else -> false
+            }
         }
     }
 
