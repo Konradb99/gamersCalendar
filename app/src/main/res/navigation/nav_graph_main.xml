@@ -17,6 +17,13 @@
             app:popExitAnim="@anim/to_right"
             android:id="@+id/action_main_list_fragment_to_fragment_profile_details"
             app:destination="@id/fragment_profile_details" />
+        <action
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            android:id="@+id/action_main_list_fragment_to_all_games_list"
+            app:destination="@id/all_games_list" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_profile_details"
@@ -31,5 +38,52 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"
             />
+        <action
+            android:id="@+id/action_fragment_profile_details_to_all_games_list"
+            app:destination="@id/all_games_list"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_all_games_list"
+        android:id="@+id/all_games_list"
+        android:name="com.konradb.gameCalendar.main_app.all_games_list"
+        android:label="all_games_list" >
+        <action
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            android:id="@+id/action_all_games_list_to_fragment_profile_details"
+            app:destination="@id/fragment_profile_details" />
+        <action
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            android:id="@+id/action_all_games_list_to_main_list_fragment"
+            app:destination="@id/main_list_fragment" />
+        <action
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
+            android:id="@+id/action_all_games_list_to_game_details"
+            app:destination="@id/game_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/game_details"
+        android:name="com.konradb.gameCalendar.game_details"
+        android:label="fragment_game_details"
+        tools:layout="@layout/fragment_game_details" >
+        <action
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            android:id="@+id/action_game_details_to_all_games_list"
+            app:destination="@id/all_games_list" />
     </fragment>
 </navigation>

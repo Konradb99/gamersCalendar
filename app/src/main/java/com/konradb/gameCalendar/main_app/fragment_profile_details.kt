@@ -50,7 +50,7 @@ class fragment_profile_details : Fragment() {
                     true
                 }
                 R.id.page_2 -> {
-
+                    view.findNavController().navigate(R.id.action_fragment_profile_details_to_all_games_list)
                     true
                 }
                 R.id.page_3 -> {

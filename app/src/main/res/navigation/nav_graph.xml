@@ -7,7 +7,7 @@
     <fragment
         tools:layout="@layout/fragment_login_panel"
         android:id="@+id/login_panel2"
-        android:name="com.konradb.gameCalendar.login.login_panel"
+        android:name="com.konradb.gameCalendar.startPanel.login.login_panel"
         android:label="login_panel" >
         <action
             android:id="@+id/action_login_panel2_to_register_panel2"
@@ -20,7 +20,7 @@
     <fragment
         tools:layout="@layout/fragment_register_panel"
         android:id="@+id/register_panel2"
-        android:name="com.konradb.gameCalendar.register.Register_panel"
+        android:name="com.konradb.gameCalendar.startPanel.register.Register_panel"
         android:label="Register_panel" >
         <action
             android:id="@+id/action_register_panel2_to_login_panel2"
