@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -94,7 +96,6 @@ class main_list_fragment : Fragment() {
                     LibraryList.clear()
                     for(game in snapshot.children) {
                         val gameItem = game.getValue(GameData::class.java)
-                        println(gameItem!!.status)
                         LibraryList.add(gameItem!!)
                     }
                     LibraryGames.value = LibraryList
@@ -119,6 +120,30 @@ class main_list_fragment : Fragment() {
                 }
                 else -> false
             }
+        }
+
+        //Filtering queue
+        view.findViewById<TextInputEditText>(R.id.appFindByNameText).doOnTextChanged { text, start, before, count ->
+            var search = view.findViewById<TextInputEditText>(R.id.appFindByNameText).text.toString()
+
+            ref.addValueEventListener(object: ValueEventListener{
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot!!.exists()){
+                        LibraryList.clear()
+                        for(game in snapshot.children) {
+                            val gameItem = game.getValue(GameData::class.java)
+                            if(gameItem?.name.toString().contains(search)) {
+                                LibraryList.add(gameItem!!)
+                            }
+                        }
+                        LibraryGames.value = LibraryList
+                    }
+                }
+            })
         }
     }
 
